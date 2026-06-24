@@ -6,10 +6,8 @@ import Toc from "./components/toc-tracker/toc";
 import { useEffect, useRef, useState } from "react";
 
 function App() {
-  // const [showFullTOC, setShowFullTOC] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
-
-  console.log(activeSection);
+  const [isOpen, setIsOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,9 +43,8 @@ function App() {
       <div className="h-full w-full">
         <h1 className="font-penScript">TOC NAVIGATION</h1>
 
-        {/* sections */}
         <div
-          ref={scrollContainerRef} 
+          ref={scrollContainerRef}
           className="sectionsWrapper max-h-[70vh] overflow-y-auto shadow-lg max-w-2xl mx-auto border border-gray-50 rounded-md mt-10 pt-5"
         >
           {sectionsBreakdown.map((section) => (
@@ -61,19 +58,29 @@ function App() {
                 {section.content}
               </p>
 
-              {section.points.map((point) => (
+              {section.points.map((point:any) => (
                 <div
                   key={point.id}
                   id={point.id}
                   className="my-8 flex flex-col items-start gap-2 text-left"
                 >
-                  <h3 className="text-lg font-semibold flex items-center gap-1">
-                    <CircleDot />
+                  <h3 className="text-md font-semibold flex items-center gap-1">
+                    <CircleDot size={20} />
                     {point.label}
                   </h3>
                   <p className="text-gray-600 leading-relaxed whitespace-pre-line">
                     {point.content}
                   </p>
+                  {point.image && (
+                    <div className="h-[400px] w-full">
+  <img
+                      src={point.image}
+                      alt={point.label}
+                      className="w-full h-full object-cover rounded-md mt-2"
+                    />
+                    </div>
+                  
+                  )}
                 </div>
               ))}
             </section>
@@ -85,8 +92,17 @@ function App() {
         sectionsBreakdown={sectionsBreakdown}
         activeSection={activeSection}
         scrollContainerRef={scrollContainerRef}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
       />
       <Socials />
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
     </main>
   );
 }

@@ -1,24 +1,18 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
-const SIZE = 32;
-const STROKE = 2.5;
-const RADIUS = (SIZE - STROKE) / 2;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
-
-interface ScrollProgressCircleProps {
-  scrollContainerSelector?: string;
+interface ScrollProgressProps {
+  scrollContainerRef: React.RefObject<HTMLDivElement | null>;
+  totalSeconds?: number;
 }
 
-export default function ScrollProgressCircle({
-  scrollContainerSelector = ".sectionsWrapper",
-}: ScrollProgressCircleProps) {
+function useScrollProgress(
+  scrollContainerRef: React.RefObject<HTMLDivElement | null>,
+) {
   const [progress, setProgress] = useState(0);
-  const containerRef = useRef<Element | null>(null);
 
   useEffect(() => {
-    const container = document.querySelector(scrollContainerSelector);
+    const container = scrollContainerRef.current;
     if (!container) return;
-    containerRef.current = container;
 
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } = container;
@@ -28,8 +22,37 @@ export default function ScrollProgressCircle({
 
     container.addEventListener("scroll", handleScroll, { passive: true });
     return () => container.removeEventListener("scroll", handleScroll);
-  }, [scrollContainerSelector]);
+  }, [scrollContainerRef]);
 
+  return progress;
+}
+
+function formatTime(progress: number, totalSeconds = 222) {
+  const elapsed = Math.round(progress * totalSeconds);
+  const m = Math.floor(elapsed / 60)
+    .toString()
+    .padStart(2, "0");
+  const s = (elapsed % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+function formatTotal(totalSeconds = 222) {
+  const m = Math.floor(totalSeconds / 60)
+    .toString()
+    .padStart(2, "0");
+  const s = (totalSeconds % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+const SIZE = 32;
+const STROKE = 2.5;
+const RADIUS = (SIZE - STROKE) / 2;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
+export function ScrollProgressCircle({
+  scrollContainerRef,
+}: ScrollProgressProps) {
+  const progress = useScrollProgress(scrollContainerRef);
   const offset = CIRCUMFERENCE * (1 - progress);
 
   return (
@@ -41,9 +64,9 @@ export default function ScrollProgressCircle({
         transform: "rotate(-90deg)",
         display: "block",
         flexShrink: 0,
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-        borderRadius:"50%",
-        background:"#7F77DD"
+        boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+        borderRadius: "50%",
+        background: "#7F77DD",
       }}
     >
       <circle
@@ -67,5 +90,72 @@ export default function ScrollProgressCircle({
         style={{ transition: "stroke-dashoffset 0.1s linear" }}
       />
     </svg>
+  );
+}
+
+export function ScrollProgressBar({
+  scrollContainerRef,
+  totalSeconds = 222,
+}: ScrollProgressProps) {
+  const progress = useScrollProgress(scrollContainerRef);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+        width: "100%",
+        padding: "0 0.25rem",
+      }}
+    >
+      <span
+        style={{
+          fontSize: 11,
+          fontVariantNumeric: "tabular-nums",
+          color: "rgba(255,255,255,0.7)",
+          flexShrink: 0,
+          minWidth: 32,
+        }}
+      >
+        {formatTime(progress, totalSeconds)}
+      </span>
+
+      <div
+        style={{
+          flex: 1,
+          height: 3,
+          borderRadius: 99,
+          background: "rgba(255,255,255,0.2)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: 99,
+            background: "#fff",
+            transformOrigin: "left",
+            transform: `scaleX(${progress})`,
+            transition: "transform 0.1s linear",
+          }}
+        />
+      </div>
+
+      <span
+        style={{
+          fontSize: 11,
+          fontVariantNumeric: "tabular-nums",
+          color: "rgba(255,255,255,0.4)",
+          flexShrink: 0,
+          minWidth: 32,
+          textAlign: "right",
+        }}
+      >
+        {formatTotal(totalSeconds)}
+      </span>
+    </div>
   );
 }

@@ -1,18 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import ScrollProgressCircle from "../scroll-progress-tracker/scroll-progress-tracker";
 import { SimplexNoiseGradient, SwirlGradient } from "../shaders/shaders";
 import { AnimatePresence, motion } from "motion/react";
+import {
+  ScrollProgressBar,
+  ScrollProgressCircle,
+} from "../scroll-progress-tracker/scroll-progress-tracker";
+import { sectionsBreakdown } from "../data";
 
 interface TocProps {
-  sectionsBreakdown: {}[];
+  sectionsBreakdown: { id: string; label: string }[];
   activeSection: string;
-  scrollContainerRef: React.RefObject<HTMLDivElement>;
+  scrollContainerRef: React.RefObject<HTMLDivElement | null>;
+  isOpen: boolean;
+  setIsOpen: (v: boolean) => void;
 }
 
 const Toc = ({
-  // sectionsBreakdown,
   activeSection,
   scrollContainerRef,
+  isOpen,
+  setIsOpen,
 }: TocProps) => {
   const [scrollDir, setScrollDir] = useState<"up" | "down">("down");
   const lastScrollTop = useRef(0);
@@ -32,41 +39,123 @@ const Toc = ({
   }, [scrollContainerRef]);
 
   return (
-    <div className="fixed bottom-10 left-1/2  -translate-x-1/2 bg-black min-w-[400px] max-h-40 max-w-md rounded-full shadow-2xl p-1">
-      {/* <div className="mainTOC">
-        <SwirlGradient />
-        <div className="">sections and sublist map</div>
-      </div> */}
+    <motion.div
+      onClick={() => setIsOpen(!isOpen)}
+      transition={{ layout: { duration: 1, type: "spring" } }}
+      style={{ boxShadow: "0px 10px 30px rgba(0,0,0, 0.5)" }}
+      layout
+      className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-black min-w-[400px] min-h-13  max-w-md flex items-center ${
+        isOpen ? "rounded-3xl" : "rounded-full"
+      } shadow-2xl p-1.5`}
+    >
+      {isOpen && (
+        <motion.div
+          className="mainTOC p-4 rounded-2xl w-full"
+          initial={{ opacity: 0, borderColor: "transparent" }}
+          animate={{
+            opacity: 1,
+            borderColor: "rgba(255,255,255,0.15)",
+          }}
+          transition={{
+            opacity: { duration: 1 },
+            borderColor: { duration: 0.3, delay: 5 },
+          }}
+          style={{ border: "1px solid transparent" }}
+          exit={{ opacity: 0 }}
+          layout
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <SwirlGradient />
+            <p className="flex flex-col text-left text-white text-sm">
+              The Evolution of Web Design
+              <span className="text-gray-500 text-xs">Aliu Gloria</span>
+            </p>
+          </div>
 
-      {/* mini toc pill view */}
-      <div className="tocFooter flex items-center justify-between gap-4 w-full">
-        <div className="flex items-center gap-4">
-          <SimplexNoiseGradient />
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={activeSection}
-              className="text-white text-sm font-medium"
-              initial={{ opacity: 0, y: scrollDir === "down" ? 12 : -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: scrollDir === "down" ? -12 : 12 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              {activeSection}
-            </motion.p>
-          </AnimatePresence>
-        </div>
+          {/* section list */}
+          <div className="flex flex-col gap-1 mb-4">
+            {sectionsBreakdown.map((item, idx) => {
+              const isActive = activeSection === item.label;
+              const handleSectionClick = (e: React.MouseEvent) => {
+                e.stopPropagation(); // prevent toggling the TOC open/close
+                const container = scrollContainerRef.current;
+                if (!container) return;
 
-        <ScrollProgressCircle />
-      </div>
-    </div>
+                const target = container.querySelector(`#${item.id}`);
+                if (target) {
+                  target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }
+              };
+
+              return (
+                <div
+                  key={idx}
+                  onClick={handleSectionClick}
+                  className="flex items-center gap-2 px-2 py-1 rounded-md transition-colors cursor-pointer"
+                  style={{
+                    background: isActive
+                      ? "rgba(255,255,255,0.08)"
+                      : "transparent",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 4,
+                      height: 4,
+                      borderRadius: "50%",
+                      flexShrink: 0,
+                      background: isActive ? "#fff" : "rgba(255,255,255,0.2)",
+                      transition: "background 0.2s",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontSize: 13,
+                      color: isActive ? "#fff" : "rgba(255,255,255,0.35)",
+                      fontWeight: isActive ? 500 : 400,
+                      transition: "color 0.2s, font-weight 0.2s",
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          <ScrollProgressBar scrollContainerRef={scrollContainerRef} />
+        </motion.div>
+      )}
+
+      {!isOpen && (
+        <motion.div
+          layout="position"
+          className="tocFooter flex items-center justify-between gap-4 w-full"
+        >
+          <div className="flex items-center gap-4">
+            <SimplexNoiseGradient />
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={activeSection}
+                className="text-white text-sm font-medium"
+                initial={{ opacity: 0, y: scrollDir === "down" ? 12 : -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: scrollDir === "down" ? -12 : 12 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                {activeSection}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          <ScrollProgressCircle scrollContainerRef={scrollContainerRef} />
+        </motion.div>
+      )}
+    </motion.div>
   );
 };
 
 export default Toc;
-
-// - the toc footer only shows the active id as the user scrolls
-// - progressbar circle fills or decrease based on user scroll activity
-// - opened toc blurs out the rest of the page details so the focus can be on the toc component
-// - opened toc replaces sections title in toc footer with the main project title (TOC navigation)
-// - expanding and minimizing toc should be a smooth interaction
-// - toc closes when user clicks outside of the toc container

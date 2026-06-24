@@ -82,7 +82,7 @@ export const SimplexNoiseGradient = () => {
 
 export const SwirlGradient = () => {
   return (
-    <div className="h-15 w-15 rounded-md overflow-hidden">
+    <div className="h-10 w-10 rounded-md overflow-hidden">
       <Swirl
         style={{ width: "100%", height: "100%" }}
         colors={["#ffd1d1", "#ff8a8a", "#660000"]}
@@ -94,7 +94,7 @@ export const SwirlGradient = () => {
         softness={0}
         noise={0.2}
         noiseFrequency={0.4}
-        speed={0.32}
+        speed={2}
       />
     </div>
   );

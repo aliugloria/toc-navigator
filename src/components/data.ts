@@ -9,15 +9,13 @@ export const sectionsBreakdown = [
       {
         id: "earlyWeb-html",
         label: "Plain HTML & Tables",
-        image:
-          "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
         content: `Before CSS was widely supported, developers used HTML tables for everything — not just data, but entire page layouts. Columns, sidebars, navigation bars — all built with <table>, <tr>, and <td>. It was hacky, fragile, and completely brilliant given the constraints. Spacer GIFs — transparent 1x1 pixel images — were used to nudge elements into position. It sounds absurd now. At the time, it was craft.
   Font choices were limited to whatever the user had installed on their machine. Comic Sans wasn't a joke — it was one of six options. Colors were chosen from a "web-safe palette" of 216 shades that rendered consistently across browsers. Design decisions weren't aesthetic — they were survival tactics.`,
       },
       {
         id: "earlyWeb-geocities",
         label: "Geocities & Personal Pages",
-        image:"/geocities.webp",
+        image: "/early-web.jpg",
         content: `GeoCities launched in 1994 and became the internet's first neighborhood. Users claimed virtual addresses — themed districts like "SiliconValley" for tech pages or "Hollywood" for entertainment — and built personal homepages that were chaotic, expressive, and deeply human. Tiled backgrounds, visitor counters, and MIDI music that autoplay the moment the page loaded — it was sensory overload by today's standards.
   
   But there was something honest about it. Every page screamed personality. You knew a real person made it, because no algorithm would ever choose that combination of neon green text on a black background. GeoCities was deleted by Yahoo in 2009 — one of the most criticized decisions in internet history. The Archive Team rescued over 650 gigabytes of it. Some things are worth keeping.`,
@@ -41,6 +39,7 @@ export const sectionsBreakdown = [
       {
         id: "flashEra-intros",
         label: "Splash Screens & Intros",
+        image: "/flash-era.png",
         content: `If you used the internet between 1998 and 2005, you remember the skip intro button. Flash enabled elaborate animated introductions — logo reveals, particle effects, soundscapes — that played before you could access the actual website. Agencies competed to out-spectacle each other. Loading bars became design elements. Preloaders had preloaders.
   
   The user experience was, objectively, terrible. You wanted to find a phone number. Instead, you watched a 45-second animation of a logo assembling itself from shards of light. But nobody cared. It was new. It was impressive. And it taught the industry its most important lesson: just because you can doesn't mean you should.`,
@@ -64,6 +63,7 @@ export const sectionsBreakdown = [
       {
         id: "mobileRevolution-mobileFirst",
         label: "Mobile First Thinking",
+        image: "/mobile-rev.jpg",
         content: `Luke Wroblewski coined the phrase "mobile first" in 2009, and it flipped the design process inside out. Instead of designing for desktop and scaling down, you start with the smallest screen and scale up. The constraint becomes the creative brief. When you only have 320px and a thumb, every element earns its place or gets cut.
   
   Mobile first thinking changed more than screen sizes — it changed priorities. Performance became a design value, not just an engineering concern. Content hierarchy became critical when you couldn't rely on sidebars and secondary columns. Touch targets replaced hover states. The discipline that emerged from these constraints made the web genuinely better.`,
@@ -87,6 +87,7 @@ export const sectionsBreakdown = [
       {
         id: "flatDesign-material",
         label: "Google Material Design",
+        image: "flat-design.jpeg",
         content: `Google's answer to flat design wasn't flat at all — it was Material. Introduced in 2014, Material Design introduced the concept of a digital "paper and ink" metaphor. Elements existed on surfaces that had depth and cast shadows. Motion had meaning — things moved in ways that communicated hierarchy and relationship. It was flat design with physics.
   
   Material Design was also the first major design system to be released publicly as a complete, documented framework. Colors, typography, spacing, motion — all specified, all justified. It shifted the conversation from individual design decisions to systems thinking. And it gave developers and designers a common language that reduced the friction between them enormously.`,
@@ -110,6 +111,7 @@ export const sectionsBreakdown = [
       {
         id: "designSystemsEra-tokens",
         label: "Design Tokens",
+        image: "/design-systems.webp",
         content: `Design tokens are the smallest decisions in a design system — a specific hex value, a spacing unit, a font size, a duration. Named and stored centrally, they become the connective tissue between design tools and code. Change a token, and the change propagates everywhere that token is used. It sounds administrative. It is, in fact, one of the most powerful ideas in modern design engineering.
   
   Tokens enabled something that had seemed impossible: a single source of truth shared between Figma and a codebase. When a designer changes "color-primary" in the design system, that change can automatically flow to CSS variables, iOS Swift files, and Android XML. The design and the product stay in sync — not through discipline, but through infrastructure.`,
@@ -120,27 +122,23 @@ export const sectionsBreakdown = [
     id: "aiFrontier",
     label: "AI & the New Frontier",
     content: `We are living through another inflection point — one that feels as significant as the iPhone moment, and possibly more disorienting. AI hasn't just entered the design process; it's begun to question the nature of the process itself. When a tool can generate a reasonable UI from a text prompt in seconds, what exactly is the designer's job?
-  
   The honest answer is that nobody knows yet. The tools are moving faster than the frameworks for thinking about them. Designers are simultaneously threatened, empowered, and confused — sometimes in the same afternoon. What's clear is that the skills that matter most are shifting, and the designers who thrive will be the ones who adapt without abandoning what makes design human.`,
     points: [
       {
         id: "aiFrontier-generative",
         label: "Generative UI",
         content: `Generative UI is the idea that interfaces don't have to be static — they can be created dynamically, in response to context, user behavior, or natural language input. Ask for a dashboard, get a dashboard. Describe a form, see a form. The interface becomes a response rather than a product. It's early, it's rough, and it's genuinely remarkable.
-  
   The implications are significant enough to be uncomfortable. If a language model can assemble a functional UI from a description, the traditional design process — research, wireframes, prototypes, handoff — looks very different. Not obsolete, but transformed. The designer's role shifts from maker to editor, from author to curator. That's not a smaller role. But it is a different one.`,
       },
       {
         id: "aiFrontier-copilots",
         label: "Design Co-pilots",
+        image: "/aifrontier.webp",
         content: `The more immediate and practical shift is AI as co-pilot rather than replacement. Tools like Figma's AI features, GitHub Copilot for frontend engineers, and a growing ecosystem of specialized assistants are changing the texture of daily work. Autocomplete isn't just for code anymore — it's for layouts, copy, component variants, and accessibility checks.
-  
   The designers and developers who are thriving right now are the ones who've learned to treat AI as a collaborator with strong opinions and no taste. It can generate ten variations in the time it would take you to sketch one. It cannot tell you which variation is right, or why, or what it means for the person who'll use it. Judgment, context, and care remain stubbornly human. For now, that's enough.`,
       },
     ],
   },
 ];
 
-
-// image source 
-// https://www.figma.com/community/file/1537634439916108777
+ 

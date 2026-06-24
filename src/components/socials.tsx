@@ -1,8 +1,8 @@
 import "../App.css";
 const Socials = () => {
   return (
-    <section className=" w-full p-4">
-      <div className="social w-full border-t border-black/24 flex items-end justify-end py-5">
+    <section className=" w-full px-4">
+      <div className="social w-full flex items-end justify-end pb-1">
         <ul className="flex items-center gap-2">
           <li>
             <a
@@ -11,7 +11,7 @@ const Socials = () => {
               className="flex items-center text-xs font-semibold"
             >
               <svg
-                className="button-icon h-5 w-5"
+                className="button-icon h-4 w-4"
                 role="presentation"
                 aria-hidden="true"
               >
@@ -28,7 +28,7 @@ const Socials = () => {
               className="flex items-center text-xs font-semibold"
             >
               <svg
-                className="button-icon h-5 w-5"
+                className="button-icon h-4 w-4"
                 role="presentation"
                 aria-hidden="true"
               >
@@ -45,7 +45,7 @@ const Socials = () => {
               className="flex items-center text-xs gap-0.5 font-semibold"
             >
               <svg
-                className="button-icon h-5 w-5 border border-gray-400 rounded-xs"
+                className="button-icon h-4 w-4 border border-gray-400 rounded-xs"
                 role="presentation"
                 aria-hidden="true"
               >

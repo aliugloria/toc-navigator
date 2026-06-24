@@ -44,7 +44,7 @@ const Toc = ({
       transition={{ layout: { duration: 1, type: "spring" } }}
       style={{ boxShadow: "0px 10px 30px rgba(0,0,0, 0.5)" }}
       layout
-      className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-black min-w-[400px] min-h-13  max-w-md flex items-center ${
+      className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-black min-w-[400px] min-h-10  max-w-md flex items-center ${
         isOpen ? "rounded-3xl" : "rounded-full"
       } shadow-2xl p-1.5`}
     >
@@ -76,8 +76,10 @@ const Toc = ({
           <div className="flex flex-col gap-1 mb-4">
             {sectionsBreakdown.map((item, idx) => {
               const isActive = activeSection === item.label;
-              const handleSectionClick = (e: React.MouseEvent) => {
-                e.stopPropagation(); // prevent toggling the TOC open/close
+              const handleSectionClick = () => {
+                // const handleSectionClick = (e: React.MouseEvent)
+                // prevent toggling the TOC open/close
+                // e.stopPropagation();
                 const container = scrollContainerRef.current;
                 if (!container) return;
 
@@ -94,7 +96,7 @@ const Toc = ({
                 <div
                   key={idx}
                   onClick={handleSectionClick}
-                  className="flex items-center gap-2 px-2 py-1 rounded-md transition-colors cursor-pointer"
+                  className="flex items-center gap-2 px-2 py-1 rounded-md transition-colors "
                   style={{
                     background: isActive
                       ? "rgba(255,255,255,0.08)"
@@ -114,10 +116,12 @@ const Toc = ({
                   <span
                     style={{
                       fontSize: 13,
-                      color: isActive ? "#fff" : "rgba(255,255,255,0.35)",
                       fontWeight: isActive ? 500 : 400,
                       transition: "color 0.2s, font-weight 0.2s",
                     }}
+                    className={`cursor-pointer hover:text-white transition-colors ${
+                      isActive ? "text-white" : "text-white/35"
+                    }`}
                   >
                     {item.label}
                   </span>

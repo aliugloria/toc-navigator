@@ -41,46 +41,51 @@ function App() {
   return (
     <main className="h-screen w-full flex flex-col justify-between">
       <div className="h-full w-full">
-        <h1 className="font-penScript">TOC NAVIGATION</h1>
-
+        <div className="border-b border-black/24 flex flex-col gap-4 md:flex-row items-end mt-10">
+        <h1 className="font-penScript whitespace-nowrap text-2xl px-4"> The Evolution of Web Design</h1>
+        <Socials />
+        </div>
+      
         <div
           ref={scrollContainerRef}
-          className="sectionsWrapper max-h-[70vh] overflow-y-auto shadow-lg max-w-2xl mx-auto border border-gray-50 rounded-md mt-10 pt-5"
+          className="sectionsWrapper max-h-[70vh] overflow-y-auto shadow-lg max-w-2xl mx-auto border border-gray-50 rounded-md mt-8 pt-5"
         >
           {sectionsBreakdown.map((section) => (
             <section
               key={section.id}
               id={section.id}
-              className="mb-16 px-8 max-w-2xl flex flex-col items-start text-left"
+              className="mb-10 px-8 max-w-2xl flex flex-col items-start text-left"
             >
               <h2 className="text-2xl font-bold mb-4">{section.label}</h2>
-              <p className="text-gray-600 leading-relaxed mb-8 whitespace-pre-line">
+              <p className="text-gray-600 leading-relaxed mb-8 whitespace-pre-line text-xs">
                 {section.content}
               </p>
 
-              {section.points.map((point:any) => (
+              {section.points.map((point: any) => (
                 <div
                   key={point.id}
                   id={point.id}
                   className="my-8 flex flex-col items-start gap-2 text-left"
                 >
-                  <h3 className="text-md font-semibold flex items-center gap-1">
+                  <h3 className="text-sm font-semibold flex items-center gap-1">
                     <CircleDot size={20} />
                     {point.label}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+                  <p className="text-gray-600 leading-relaxed whitespace-pre-line text-xs">
                     {point.content}
                   </p>
                   {point.image && (
                     <div className="h-[400px] w-full">
-  <img
-                      src={point.image}
-                      alt={point.label}
-                      className="w-full h-full object-cover rounded-md mt-2"
-                    />
+                      <img
+                        src={point.image}
+                        alt={point.label}
+                        className="w-full h-full object-cover rounded-md mt-2"
+                      />
                     </div>
-                  
                   )}
+                  <footer className="text-xs text-left text-gray-400 pt-1 max-w-2xl mx-auto w-full">
+                    <p>Images used for editorial and educational purposes.</p>
+                  </footer>
                 </div>
               ))}
             </section>
@@ -95,7 +100,6 @@ function App() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <Socials />
 
       {isOpen && (
         <div

@@ -51,7 +51,7 @@ function App() {
 
         <div
           ref={scrollContainerRef}
-          className="scrollbar-none sectionsWrapper max-h-[70vh] overflow-y-auto shadow-lg max-w-2xl mx-auto border border-gray-50 rounded-md mt-8 pt-5"
+          className="scrollbar-none sectionsWrapper h-[90vh] overflow-y-auto shadow-lg max-w-2xl mx-auto border border-gray-50 rounded-md mt-8 pt-5"
         >
           {sectionsBreakdown.map((section) => (
             <section
@@ -87,7 +87,7 @@ function App() {
                     </div>
                   )}
                   {point.image && (
-                    <footer className="text-xs text-left text-gray-400 pt-1 max-w-2xl mx-auto w-full">
+                    <footer className="text-xs text-left italic text-gray-400 pt-1 max-w-2xl mx-auto w-full">
                       <p>Images used for editorial and educational purposes.</p>
                     </footer>
                   )}

@@ -33,7 +33,6 @@ export const sectionsBreakdown = [
         id: "flashEra-skeuomorphism",
         label: "Skeuomorphism",
         content: `Skeuomorphism was the philosophy that digital interfaces should mimic their physical counterparts. Buttons should look pressable. Calendars should look like leather-bound notebooks. Notes apps should look like legal pads, complete with stitching along the top edge. The logic was sound — users were new to digital interfaces, and familiar visual metaphors reduced friction.
-  
   Apple perfected this under Scott Forstall. iCal had a torn paper texture at the top. The Contacts app looked like an address book. The Game Center had green felt like a casino table. Critics called it kitsch. Users loved it. And then, almost overnight, they didn't.`,
       },
       {

@@ -41,10 +41,23 @@ const Toc = ({
   return (
     <motion.div
       onClick={() => setIsOpen(!isOpen)}
-      transition={{ layout: { duration: 1, type: "spring" } }}
-      style={{ boxShadow: "0px 10px 30px rgba(0,0,0, 0.5)" }}
       layout
-      className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-black min-w-[400px] min-h-10  max-w-md flex items-center ${
+      transition={{
+        layout: {
+          duration: isOpen ? 0.8 : 0.1,
+          type: "spring",
+          stiffness: isOpen ? 120 : 300,
+          damping: isOpen ? 20 : 30,
+        },
+      }}
+      // transition={{
+      //   layout: {
+      //     duration: 1,
+      //     type: "spring",
+      //   },
+      // }}
+      style={{ boxShadow: "0px 10px 30px rgba(0,0,0, 0.5)" }}
+      className={`tocContainer fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-black min-w-[400px] min-h-10  max-w-md flex items-center ${
         isOpen ? "rounded-3xl" : "rounded-full"
       } shadow-2xl p-1.5`}
     >

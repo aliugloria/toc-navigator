@@ -42,13 +42,16 @@ function App() {
     <main className="h-screen w-full flex flex-col justify-between">
       <div className="h-full w-full">
         <div className="border-b border-black/24 flex flex-col gap-4 md:flex-row items-end mt-10">
-        <h1 className="font-penScript whitespace-nowrap text-2xl px-4"> The Evolution of Web Design</h1>
-        <Socials />
+          <h1 className="font-penScript whitespace-nowrap text-2xl px-4">
+            {" "}
+            The Evolution of Web Design
+          </h1>
+          <Socials />
         </div>
-      
+
         <div
           ref={scrollContainerRef}
-          className="sectionsWrapper max-h-[70vh] overflow-y-auto shadow-lg max-w-2xl mx-auto border border-gray-50 rounded-md mt-8 pt-5"
+          className="scrollbar-none sectionsWrapper max-h-[70vh] overflow-y-auto shadow-lg max-w-2xl mx-auto border border-gray-50 rounded-md mt-8 pt-5"
         >
           {sectionsBreakdown.map((section) => (
             <section
@@ -75,17 +78,19 @@ function App() {
                     {point.content}
                   </p>
                   {point.image && (
-                    <div className="h-[400px] w-full">
+                    <div className="h-[300] md:h-[400px] w-full">
                       <img
                         src={point.image}
                         alt={point.label}
-                        className="w-full h-full object-cover rounded-md mt-2"
+                        className="w-full h-full object-contain md:object-cover rounded-md mt-2"
                       />
                     </div>
                   )}
-                  <footer className="text-xs text-left text-gray-400 pt-1 max-w-2xl mx-auto w-full">
-                    <p>Images used for editorial and educational purposes.</p>
-                  </footer>
+                  {point.image && (
+                    <footer className="text-xs text-left text-gray-400 pt-1 max-w-2xl mx-auto w-full">
+                      <p>Images used for editorial and educational purposes.</p>
+                    </footer>
+                  )}
                 </div>
               ))}
             </section>

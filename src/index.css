@@ -109,3 +109,13 @@ p {
 .font-penScript{
   font-family: 'Nanum Pen Script', cursive;
 }
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+

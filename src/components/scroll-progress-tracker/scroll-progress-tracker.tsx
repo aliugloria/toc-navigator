@@ -5,27 +5,7 @@ interface ScrollProgressProps {
   totalSeconds?: number;
 }
 
-// function useScrollProgress(
-//   scrollContainerRef: React.RefObject<HTMLDivElement | null>,
-// ) {
-//   const [progress, setProgress] = useState(0);
-
-//   useEffect(() => {
-//     const container = scrollContainerRef.current;
-//     if (!container) return;
-
-//     const handleScroll = () => {
-//       const { scrollTop, scrollHeight, clientHeight } = container;
-//       const total = scrollHeight - clientHeight;
-//       setProgress(total > 0 ? scrollTop / total : 0);
-//     };
-
-//     container.addEventListener("scroll", handleScroll, { passive: true });
-//     return () => container.removeEventListener("scroll", handleScroll);
-//   }, [scrollContainerRef]);
-
-//   return progress;
-// }
+ 
 
 function useScrollProgress(
   scrollContainerRef: React.RefObject<HTMLDivElement | null>,
